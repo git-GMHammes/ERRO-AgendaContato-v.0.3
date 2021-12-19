@@ -1,0 +1,35 @@
+{%extends "tempIndex.html"%} {%block conteudo%}
+<!-- EXCELENTE -->
+<!-- Boa formatação para Bootstrap  -->
+<!-- ------ ↓ -- ↓ ---------------- -->
+<h1 class="mt-3 mb-3">Login</h1>
+<!-- ------ ↑ -- ↑ ---------------- -->
+<!-- Esta formatação é muito útil - -->
+<!-- EXCELENTE -->
+<form method="post" action="{%url 'login'%}">
+  {% csrf_token %} {%include 'parciais/tempAlerta.html'%}
+  <!-- Esta mensagem virá ↑ da View -->
+  <div class="form-group">
+    <label for="strUsuario">Usuário</label>
+    <input
+      type="text"
+      name="strUsuario"
+      value="{{request.POST.strUsuario}}"
+      class="form-control"
+      id="strUsuario"
+      placeholder="Usuário"
+    />
+  </div>
+  <div class="form-group">
+    <label for="strSenha">Senha</label>
+    <input
+      type="password"
+      name="strSenha"
+      class="form-control"
+      id="strSenha"
+      placeholder="********"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+{%endblock%}

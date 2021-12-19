@@ -1,0 +1,70 @@
+<!--Caminho: ↓ C:\xampp\htdocs\projeto\python\_Desen\djAgPy\djTemplates\tempIndex.html-->
+<!--Começa ↓ estendendo o \djTemplates\tempIndex.html-->
+{%extends 'tempIndex.html'%}
+<!--Bloco ↓ que será puxado no \djTemplates\tempIndex.html-->
+{%block conteudo%}
+<h1 class="mt-5">
+  Minha agenda </h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID </th ></th>
+        <th>Nome </th ></th>
+        <th>Sobrenome </th ></th>
+        <th>Telefone </th></th>
+        <th>Categoria </th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop For do django -->
+      <!-- Aqui recebe a chave ↓ do index da view.py -->
+      {%for contato in passaHtmlContatos%}
+      <!-- Esta ↑ Variável recebe os registros do For -->
+      <!-- ↓ Este if ↓ foi criado depois que foi realizadas as seguintes alterações ↓-->
+      <!-- ↓ bolExibir = models.BooleanField(default=True) → \appContatos\models.py-->
+      <!-- ↓ list_display = ['bolExibir', ] → \appContatos\admin.py-->
+      <!-- ↓ list_editable = ['strEmail'] → \appContatos\admin.py-->
+      <tr>
+          <td>{{contato.id}}</td>
+          <td>
+            <!-- url - \appContatos\urls.py -->
+            <!-- 'verContato' -  name='verContato' do \appContatos\urls.py-->
+            <!-- contato.id - contato do for + .campo id -->
+            <a href="{%url 'verContato' contato.id%}">{{contato.strNome}}</a>
+            <!-- --------------- Da tabela do DB, este é o .campo ↑ -->
+          </td>
+          <!-- --- Variável[For] + .campo da tabela do DB -->
+          <!-- ------------- ↓ -------- ↓ --------------- -->
+          <td>{{contato.strSobreNome}}</td>
+          <td>{{contato.strTelefone}}</td>
+          <td>{{contato.strKeyTabCategoria}}</td>
+        </tr>
+      {%endfor%}
+      <!-- ↑ Fim do Loop For do django -->
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+    <!--↓ Início da paginação-->
+    <ul class="pagination">
+      <!-- -- Variável chamada ↓ da view.py ↓ - \appContatos\views.py-->
+      {%for pagina in passaHtmlContatos.paginator.page_range%}
+      <!---- ATENÇÃO: [paginator] NÃO é uma ↑ variável da view.py -->
+        {%if passaHtmlContatos.number == pagina%}
+          <li class="page-item active">
+            <a class="page-link" href="?p={{pagina}}&termo={{request.GET.termo}}">
+              {{pagina}}
+            </a>
+          </li>
+        {%else%}
+          <li class="page-item">
+            <a class="page-link" href="?p={{pagina}}&termo={{request.GET.termo}}">
+              {{pagina}}
+            </a>
+          </li>
+        {%endif%}
+      {%endfor%}
+      <!--↑ Fim da paginação ↑-->
+    </ul>
+  </nav>
+</h1>
+{%endblock%}

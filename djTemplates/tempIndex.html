@@ -1,0 +1,40 @@
+{%load static%}
+<!-- ↑ Iniciar com load static-->
+<!-- Configurado no: agendaContatos\settings.py-->
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <!-- Bootstrap core CSS -->
+    <!-- charset="utf-8" -->
+    <!-- ↓ include da pasta djTemplates/parciais/ registrada no settings do projeto -->
+    {%include 'parciais/tempHead.html'%}
+    <title>Agenda</title>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <!-- ↓ include da pasta djTemplates/parciais/ registrada no settings do projeto -->
+    {%include 'parciais/tempNavMenu.html'%}
+    <!-- EXCELENTE -->
+    <!-- Busca uma palavra chave na URL -->
+    <!-- ------------------- ↓ ---- ↓ ---->
+    {%if 'usuarios' not in request.path%}
+    <!-- ------------------- ↑ ---- ↑ ---->
+    <!-- Este tipo de IF é muito útil - -->
+    <!-- EXCELENTE -->
+      {%include 'parciais/tempBusca.html'%}
+    {%endif%}
+    <!-- %include 'parciais/tempAlerta.html'% -->
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <!--retirado ↓ do: appContatos/templates/contatoIndex.html-->
+          {%block conteudo%}{%endblock%}
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.slim.min.js'%}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  </body>
+</html>

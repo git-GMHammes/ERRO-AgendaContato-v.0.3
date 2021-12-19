@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="container">&ensp;</div>
+</div>
+<div class="row">
+  <div class="container">
+    <form method="get" action="{% url 'busca' %}">
+      <div class="form-group row">
+        <div class="col-12">
+          <input
+            class="form-control"
+            type="search"
+            value="{{ request.GET.termo }}"
+            id="search-input"
+            placeholder="Digite sua pesquisa"
+            name="termo"
+          />
+          <!-- Veja ↑ termo irá ser exibido no: \appContatos\views.py-->
+          <!-- no método busca-->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
